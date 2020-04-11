@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FollowButton">
+        <attr name="fb_radius" format="dimension"/>
+        <attr name="fb_success_line_width" format="dimension"/>
+        <attr name="fb_add_line_width" format="dimension"/>
+        <attr name="fb_success_background" format="color"/>
+        <attr name="fb_add_background" format="color"/>
+        <attr name="fb_success_line_color" format="color"/>
+        <attr name="fb_add_line_color" format="color"/>
+        <attr name="fb_left_offset" format="dimension"/>
+        <attr name="fb_top_offset" format="dimension"/>
+    </declare-styleable>
+</resources>

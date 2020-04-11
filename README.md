@@ -1,0 +1,1 @@
+![](https://github.com/kHRYSTAL/TiktokFollowButton/blob/master/screenshot/screenshot.gif)
