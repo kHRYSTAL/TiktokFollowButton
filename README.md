@@ -1,1 +1,1 @@
-<img src="https://github.com/kHRYSTAL/TiktokFollowButton/blob/master/screenshot/screenshot.gif" width="1280" height="720" align="middle" />
+<img src="https://github.com/kHRYSTAL/TiktokFollowButton/blob/master/screenshot/screenshot.gif" width="272" height="480" align="middle" />
