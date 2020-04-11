@@ -1,1 +1,1 @@
-![](https://github.com/kHRYSTAL/TiktokFollowButton/blob/master/screenshot/screenshot.gif)
+<img src="https://github.com/kHRYSTAL/TiktokFollowButton/blob/master/screenshot/screenshot.gif" width="1280" height="720" align="middle" />
