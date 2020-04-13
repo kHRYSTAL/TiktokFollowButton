@@ -12,8 +12,7 @@
         app:fb_radius="20dp"
         app:fb_border_width="2dp"
         app:fb_border_color="#fff"
-        android:layout_centerInParent="true"
-        />
+        android:layout_centerInParent="true" />
 
     <Button
         android:id="@+id/resetBtn"
