@@ -45,6 +45,10 @@ public class FollowButton extends View {
     private float successLineWidth;
     private Path successPath;
 
+    private Paint borderPaint;
+    private float borderStrokeWidth;
+    private Path borderPath = new Path();
+
     private PathMeasure pathMeasure;
     private boolean startDrawnSuccess;
 
@@ -56,6 +60,8 @@ public class FollowButton extends View {
     private int addBackgroundColor;
     @ColorInt
     private int successBackgroundColor;
+    @ColorInt
+    private int borderColor;
 
     private float leftOffset;
     private float topOffset;
@@ -85,6 +91,8 @@ public class FollowButton extends View {
         successBackgroundColor = ta.getColor(R.styleable.FollowButton_fb_success_background, 0xFFFFFFFF);
         leftOffset = ta.getDimension(R.styleable.FollowButton_fb_left_offset, 0f);
         topOffset = ta.getDimension(R.styleable.FollowButton_fb_top_offset, 0f);
+        borderStrokeWidth = ta.getDimension(R.styleable.FollowButton_fb_border_width, 0f);
+        borderColor = ta.getColor(R.styleable.FollowButton_fb_border_color, 0xFFF);
         ta.recycle();
         initView();
     }
@@ -107,12 +115,42 @@ public class FollowButton extends View {
         successPaint.setColor(successLineColor);
         successPaint.setStyle(Paint.Style.STROKE);
         successPaint.setStrokeWidth(successLineWidth);
+
+        borderPaint = new Paint();
+        borderPaint.setAntiAlias(true);
+        borderPaint.setColor(borderColor);
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(borderStrokeWidth);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        createBorderPath(w, h);
         createPathBySize();
+    }
+
+    private void createBorderPath(int w, int h) {
+        int left = (int) borderStrokeWidth;
+        int top = (int) borderStrokeWidth;
+        int right = (int) (left + w - borderStrokeWidth * 2);
+        int bottom = (int) (top + h - borderStrokeWidth * 2);
+        int d = bottom - top;
+        rect.set(left, top, right, bottom);
+        borderPath.reset(); // notice
+        borderPath.addRoundRect(rect, radius, radius, Path.Direction.CW);
+        int l = (int) (d / 2.0f);
+        borderPath.moveTo(left + l, top);
+        borderPath.lineTo(right - l, top);
+
+        borderPath.moveTo(left + l, bottom);
+        borderPath.lineTo(right - l, bottom);
+
+        borderPath.moveTo(left, top + l);
+        borderPath.lineTo(left, bottom - l);
+
+        borderPath.moveTo(right, top + l);
+        borderPath.lineTo(right, bottom - l);
     }
 
     private void createPathBySize() {
@@ -128,9 +166,9 @@ public class FollowButton extends View {
 
         // 画对勾
         successPath = new Path();
-        successPath.moveTo(width * 0.19f + leftOffset, height * 0.43f + topOffset);
-        successPath.lineTo(width * 0.4f + leftOffset, height * 0.62f + topOffset);
-        successPath.lineTo(width * 0.8f + leftOffset, height * 0.27f + topOffset);
+        successPath.moveTo(width * 0.26f + leftOffset, height * 0.49f + topOffset);
+        successPath.lineTo(width * 0.43f + leftOffset, height * 0.66f + topOffset);
+        successPath.lineTo(width * 0.76f + leftOffset, height * 0.27f + topOffset);
 
         pathMeasure = new PathMeasure(successPath, true);
     }
@@ -138,7 +176,6 @@ public class FollowButton extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        rect.set(0f, 0f, getMeasuredWidth(), getMeasuredHeight());
         if (startDrawnSuccess) {
             rectPaint.setColor(successBackgroundColor);
             canvas.drawRoundRect(rect, radius, radius, rectPaint);
@@ -148,6 +185,7 @@ public class FollowButton extends View {
             canvas.drawRoundRect(rect, radius, radius, rectPaint);
             canvas.drawPath(addPath, addPaint);
         }
+        canvas.drawPath(borderPath, borderPaint);
     }
 
     private void createAnimationCollectionIfNull(final boolean reset) {

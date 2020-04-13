@@ -10,5 +10,7 @@
         <attr name="fb_add_line_color" format="color"/>
         <attr name="fb_left_offset" format="dimension"/>
         <attr name="fb_top_offset" format="dimension"/>
+        <attr name="fb_border_width" format="dimension"/>
+        <attr name="fb_border_color" format="color"/>
     </declare-styleable>
 </resources>
