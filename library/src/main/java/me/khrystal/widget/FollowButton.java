@@ -377,6 +377,11 @@ public class FollowButton extends View {
         createPathBySize();
     }
 
+    public long getDuration() {
+        createAnimationCollectionIfNull(false);
+        return animationCollection.getDuration();
+    }
+
     private float dp2px(float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return dpValue * scale + 0.5f;
